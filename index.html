@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personalized Assistant Starter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- =============================================
+       HEADER SECTION
+       The title and a short description of the app.
+       To change the title or subtitle, edit the text
+       inside the <h1> and <p> tags below.
+  ============================================= -->
+  <header>
+    <h1>🤖 Personalized Assistant Starter</h1>
+    <p class="subtitle">
+      Design your own AI assistant idea — no coding required. Fill in the
+      form below and get a starter configuration you can bring to ChatGPT,
+      Claude, or any other AI tool.
+    </p>
+  </header>
+
+  <!-- =============================================
+       MAIN CONTENT AREA
+       The form where users enter their information,
+       and the results area where the output appears.
+  ============================================= -->
+  <main>
+
+    <!-- FORM SECTION -->
+    <section class="form-section" aria-label="Assistant configuration form">
+      <h2>Tell us about your assistant</h2>
+
+      <!-- Use-case type dropdown -->
+      <div class="form-group">
+        <label for="useCaseType">
+          I am a… <span class="required" aria-hidden="true">*</span>
+        </label>
+        <select id="useCaseType" name="useCaseType">
+          <option value="">— choose one —</option>
+          <option value="teacher">Teacher / Instructor</option>
+          <option value="parent">Parent / Caregiver</option>
+          <option value="student">Student / Learner</option>
+          <option value="professional">Professional / Work context</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <!-- Assistant role text input -->
+      <div class="form-group">
+        <label for="assistantRole">
+          Assistant role
+          <span class="hint">
+            (e.g., "grading assistant for my composition class",
+            "chore tracker coach for my kids")
+          </span>
+        </label>
+        <input
+          type="text"
+          id="assistantRole"
+          name="assistantRole"
+          placeholder="Describe the job you want your assistant to do…"
+          maxlength="200"
+        />
+      </div>
+
+      <!-- Context / details textarea -->
+      <div class="form-group">
+        <label for="contextDetails">
+          Context / details
+          <span class="hint">
+            (e.g., course name, grading categories, list of chores, study topics)
+          </span>
+        </label>
+        <textarea
+          id="contextDetails"
+          name="contextDetails"
+          rows="5"
+          placeholder="Add any extra details that help describe your situation…"
+          maxlength="1000"
+        ></textarea>
+      </div>
+
+      <!-- Submit button -->
+      <button type="button" id="generateBtn" class="btn-primary">
+        ✨ Generate My Configuration
+      </button>
+    </section>
+
+    <!-- RESULTS SECTION (hidden until the button is clicked) -->
+    <section
+      class="results-section"
+      id="resultsSection"
+      aria-live="polite"
+      aria-label="Generated assistant configuration"
+      hidden
+    >
+      <h2>Your Assistant Configuration</h2>
+
+      <!-- Each card is one labeled section of the output -->
+      <div class="card" id="cardOverview">
+        <h3>📋 Overview</h3>
+        <p id="outputOverview"></p>
+      </div>
+
+      <div class="card" id="cardInputs">
+        <h3>📥 Inputs you provide</h3>
+        <ul id="outputInputs"></ul>
+      </div>
+
+      <div class="card" id="cardOutputs">
+        <h3>📤 Outputs you get</h3>
+        <ul id="outputOutputs"></ul>
+      </div>
+
+      <div class="card" id="cardPrompts">
+        <h3>💬 Example prompts to use with an AI tool</h3>
+        <ul id="outputPrompts"></ul>
+      </div>
+
+      <!-- Copy-to-clipboard button -->
+      <button type="button" id="copyBtn" class="btn-secondary">
+        📋 Copy configuration to clipboard
+      </button>
+      <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+       FOOTER
+       Workshop credits go here. Edit the text below.
+  ============================================= -->
+  <footer>
+    <p>
+      Built at the <strong>[Workshop Name]</strong> · Facilitated by
+      <strong>[Your Name]</strong> · <a href="#">[Your Website]</a>
+    </p>
+    <p class="footer-note">
+      This is a starter template — customize it to fit your own use case!
+    </p>
+  </footer>
+
+  <!-- Link to our JavaScript file (always at the bottom of <body>) -->
+  <script src="script.js"></script>
+</body>
+</html>
