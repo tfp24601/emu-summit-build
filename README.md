@@ -249,10 +249,10 @@ Once you're comfortable with the basics, here are some ways to extend the app:
 
 | | |
 |---|---|
-| **Workshop** | [Workshop Name — update me] |
-| **Facilitator** | [Your Name — update me] |
-| **Website / contact** | [Your Website — update me] |
-| **Date & location** | [Date and Location — update me] |
+| **Workshop** | AI Builder Workshop |
+| **Facilitator** | Ben Linford |
+| **Website / contact** | https://sharedsapience.com/consultation-personalized-help/ |
+| **Date & location** | 2026 |
 
 ---
 
