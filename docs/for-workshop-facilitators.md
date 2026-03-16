@@ -1,116 +1,164 @@
-# 🎙️ For Workshop Facilitators
+# For Workshop Facilitators
 
-> This document is for people who want to **reuse or adapt this repository** in their own AI workshop, classroom, or training session.
+> Use this guide if you want to reuse or adapt this repository for your own workshop, classroom, or training session.
 
 ---
 
 ## What this repo is
 
-The **Personalized Assistant Starter** is a deliberately simple, self-contained web app that runs in the browser with no build step, no backend, and no required accounts. It's designed to be:
+The **Prompt-to-App Builder** is a deliberately simple browser app that helps participants see prompt structure in a visual way.
 
-- **Safe to hand to a beginner** — they can download the ZIP and double-click `index.html` without installing anything.
-- **Easy to live-code alongside** — the JS is well-commented and split into labeled sections so you can walk through it line by line.
-- **Easy to fork and extend** — participants can fork the repo on GitHub and immediately start making it their own.
+Instead of generating an "assistant configuration," the app now helps people build a prompt for an **AI coder assistant** by asking for:
 
----
+- their role,
+- the AI role,
+- the app goal,
+- context and details,
+- and the must-have pieces.
 
-## Suggested run of show (~60–90 minutes)
+The app then generates a live build prompt that participants can copy into a coding assistant.
 
-Use this as a rough agenda template. Adjust timing to your audience.
+This makes the repo useful for workshops where the goal is to help people move from:
 
-### 1. Set the stage (~10 min)
+**idea -> structured prompt -> first working app**
 
-- Ask the audience: *"What's a small, annoying, repetitive task in your work or home life that you wish you had a helper for?"*
-- Collect a few examples (grading, chores, emails, study planning, etc.).
-- Introduce the idea: **LLMs are great at following structured instructions — so our job is to structure the instructions clearly.**
+The app is designed to be:
 
-### 2. Demo the app live (~10 min)
-
-- Open `index.html` in your browser (or share your screen from a hosted version).
-- Fill in the form with a concrete example (e.g., "grading assistant for a 10th-grade composition class").
-- Walk through the generated configuration — point out each section and explain why it's useful.
-- Click "Copy to clipboard" and paste the result into ChatGPT or Claude live to show the output.
-
-### 3. Use an LLM to scaffold and edit the app together (~20 min)
-
-- Open Claude or ChatGPT alongside VS Code (or your editor of choice).
-- Paste in the recommended facilitator prompt (see below) and show participants how to:
-  - Add a new field to the form.
-  - Change the placeholder text.
-  - Edit the generated output for a specific use case.
-- Emphasize: *"You don't have to understand every line. You just have to be able to read it, ask good questions, and test the result."*
-
-### 4. Participants customize their own copy (~20–30 min)
-
-- Walk participants through forking the repo (or downloading the ZIP).
-- Give them a specific customization task, e.g.:
-  - *"Change the placeholder text in the 'assistant role' field to something relevant to your own context."*
-  - *"Edit the `teacher` template in `script.js` to add one more example prompt that fits your class."*
-- Circulate and help as needed. Encourage use of an AI coding assistant for any confusion.
-
-### 5. Share and next steps (~10 min)
-
-- Ask 2–3 participants to briefly share what they changed and why.
-- Point people to the **README** for how to clone, commit, and push.
-- Leave them with the "next steps" ideas from the README as homework.
+- **beginner-friendly**: no install or account required to open it
+- **easy to live-code**: plain HTML, CSS, and JavaScript
+- **easy to fork**: participants can adapt the repo quickly
 
 ---
 
-## Recommended facilitator prompt for LLM iteration
+## Suggested run of show (60-90 minutes)
 
-Use this prompt (or adapt it) to demonstrate live AI-assisted code editing during the workshop. Paste it into Claude or ChatGPT with the contents of `script.js` appended at the end.
+### 1. Set the stage (10 minutes)
 
+- Ask participants what small browser-based tool would actually help them.
+- Collect examples from different contexts like teaching, parenting, ministry, student life, administration, or small business.
+- Frame the session around one idea: strong prompts are structured, not mysterious.
+
+### 2. Demo the app live (10 minutes)
+
+- Open `index.html` in the browser.
+- Fill in the five prompt blocks with a concrete example.
+- Point out how the build prompt updates live as you type.
+- Click **Copy Prompt**.
+- Paste the result into your AI coder assistant and ask them to build version one.
+
+### 3. Show AI-assisted iteration on the code (15-20 minutes)
+
+- Open the project in VS Code or another editor.
+- Show `index.html`, `script.js`, and `style.css`.
+- Use your coding assistant to make one small improvement live, such as:
+  - adding a new field,
+  - changing the prompt wording,
+  - adjusting the visual design,
+  - or exporting the prompt to a file.
+- Emphasize that participants do not need to understand every line before they can start making useful changes.
+
+### 4. Let participants customize their own copy (20-30 minutes)
+
+- Have them fork or download the repo.
+- Give them a concrete task, such as:
+  - changing placeholders to match their audience,
+  - adding a target audience field,
+  - or adjusting the generated prompt to fit their app idea.
+- Encourage them to ask their coding assistant to explain anything confusing.
+
+### 5. Share out and close (10 minutes)
+
+- Invite a few participants to show the prompt they built.
+- Ask what changed once they made their prompt more specific.
+- Point them back to the README for setup, forking, and customization ideas.
+
+---
+
+## Recommended facilitator prompt for live editing
+
+Use a prompt like this when you want to demonstrate how to improve the app during the session:
+
+```text
+I have a beginner-friendly browser app called "Prompt-to-App Builder."
+It is written in plain HTML, CSS, and vanilla JavaScript with no frameworks.
+
+The app helps workshop participants build a prompt for an AI coder assistant.
+Right now it has fields for:
+- my role
+- AI role
+- app goal
+- context and details
+- must-have pieces
+
+It also shows a live prompt preview and lets users copy the finished prompt.
+
+Please help me add a new field called "Target audience."
+
+Requirements:
+1. Add the new input to index.html.
+2. Save and restore the field with localStorage in script.js.
+3. Include the new value in the generated prompt.
+4. Keep the code beginner-friendly and easy to explain live.
+5. Explain each change in plain English.
 ```
-I have a beginner-friendly browser app called "Personalized Assistant Starter".
-It's written in plain HTML, CSS, and vanilla JavaScript — no frameworks.
 
-Here is the JavaScript file (script.js):
-
-[PASTE THE CONTENTS OF script.js HERE]
-
-Please help me do the following:
-1. Add a new use-case type called "librarian" to the `templates` object.
-2. Give it realistic inputItems, outputItems, and example prompts relevant to a school librarian.
-3. Add a corresponding <option> to the dropdown in index.html.
-4. Keep all comments in place and match the existing code style.
-
-Explain each change you make in plain English so a beginner can follow along.
-```
-
-Feel free to substitute a different customization task (e.g., adding an export button, changing colors, adding a new output section) based on your audience's interests.
+That example is better aligned with the current version of the repo than the old "use-case templates" workflow.
 
 ---
 
 ## Technical prerequisites for facilitators
 
-- A GitHub account (free): https://github.com
-- Git installed locally (for live cloning demo): https://git-scm.com/downloads
-- VS Code (recommended editor, free): https://code.visualstudio.com/
-- A Claude or ChatGPT account for the live AI demo
+- A GitHub account
+- Git installed locally: https://git-scm.com/downloads
+- A text editor such as VS Code: https://code.visualstudio.com/
+- A browser
+- Access to an AI coder assistant for the live demo
 
-No Node.js, no npm, no build tools — just a text editor and a browser.
+No Node.js, package manager, or backend setup is required.
 
----
+If you want to serve the files on a local URL during the workshop, a simple command like this is enough:
 
-## How to reuse this repo in your own workshop
-
-1. **Fork** this repo into your own GitHub account (click the Fork button at the top of the repo page).
-2. Update the **footer** in `index.html` with your workshop name and your name.
-3. Update the **Workshop credits** section in `README.md`.
-4. Optionally, pre-fill the `templates` object in `script.js` with examples relevant to your audience's domain.
-5. Share your fork's GitHub URL with participants so they can fork *your* version.
-
-That's it! The app is designed to be reused with minimal setup.
+```bash
+python -m http.server 8000
+```
 
 ---
 
-## Tips for mixed-experience audiences
+## How to adapt this repo for your own workshop
 
-- **Absolute beginners:** Steer them toward Option A in the README (download ZIP, double-click). Don't require Git on day one.
-- **Intermediate participants:** Encourage them to fork the repo and try making a small change, then commit and push.
-- **More advanced participants:** Challenge them to add a new feature (export, localStorage list of saved configs, API integration) and share it with the group.
-- **Everyone:** Encourage use of AI tools to explain code they don't understand. Normalize saying "I asked Claude to explain this line to me."
+1. Fork the repo into your own GitHub account.
+2. Update the header and footer text in `index.html`.
+3. Update the workshop credits in `README.md`.
+4. Adjust the prompt language in `script.js` so it matches your audience.
+5. Optionally change the colors and layout in `style.css`.
+6. Share your forked repo or a hosted version with participants.
+
+If your audience works in a specific domain, consider pre-customizing:
+
+- placeholder examples,
+- fallback bullet points,
+- and the wording inside `buildPrompt()`.
 
 ---
 
-*This facilitator guide is part of the Personalized Assistant Starter workshop kit. Feel free to adapt it for your own use.*
+## Tips for mixed-experience groups
+
+- **Beginners**: steer them toward downloading the ZIP and double-clicking `index.html`.
+- **Intermediate participants**: encourage them to fork the repo and make one small change.
+- **Advanced participants**: challenge them to add a feature like prompt export, saved drafts, or GitHub Pages deployment.
+- **Everyone**: normalize asking a coding assistant to explain code in plain English.
+
+---
+
+## Good extension ideas for workshop follow-up
+
+- Add a target audience field.
+- Add a sample input field.
+- Add prompt mode toggles like "quick draft" vs. "detailed brief."
+- Save multiple prompts in the browser.
+- Add a button that downloads the generated prompt as a text file.
+- Publish the app with GitHub Pages so participants can share it easily.
+
+---
+
+This facilitator guide is part of the Prompt-to-App Builder workshop kit and is intended to be adapted.

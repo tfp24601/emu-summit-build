@@ -3,148 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Personalized Assistant Starter</title>
+  <title>Prompt-to-App Builder</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- =============================================
-       HEADER SECTION
-       The title and a short description of the app.
-       To change the title or subtitle, edit the text
-       inside the <h1> and <p> tags below.
-  ============================================= -->
   <header>
-    <h1>🤖 Personalized Assistant Starter</h1>
+    <p class="eyebrow">Workshop prompt anatomy</p>
+    <h1>Prompt-to-App Builder</h1>
     <p class="subtitle">
-      Design your own AI assistant idea — no coding required. Fill in the
-      form below and get a starter configuration you can bring to ChatGPT,
-      Claude, or any other AI tool.
+      Show what prompting actually is: describe who you are, what kind of AI
+      coder should help, what app your coding assistant should build, and the
+      details your coding assistant needs. The clearer the setup, the better
+      the finished prompt will be for your AI coder assistant.
     </p>
   </header>
 
-  <!-- =============================================
-       MAIN CONTENT AREA
-       The form where users enter their information,
-       and the results area where the output appears.
-  ============================================= -->
   <main>
-
-    <!-- FORM SECTION -->
-    <section class="form-section" aria-label="Assistant configuration form">
-      <h2>Tell us about your assistant</h2>
-
-      <!-- Use-case type dropdown -->
-      <div class="form-group">
-        <label for="useCaseType">
-          I am a… <span class="required" aria-hidden="true">*</span>
-        </label>
-        <select id="useCaseType" name="useCaseType">
-          <option value="">— choose one —</option>
-          <option value="teacher">Teacher / Instructor</option>
-          <option value="parent">Parent / Caregiver</option>
-          <option value="student">Student / Learner</option>
-          <option value="professional">Professional / Work context</option>
-          <option value="other">Other</option>
-        </select>
+    <section class="form-section" aria-label="Prompt builder form">
+      <div class="section-heading">
+        <h2>Build the prompt in five parts</h2>
+        <p>
+          Each block becomes part of the final app-building prompt. The preview
+          updates as you type so people can see how prompting comes together.
+        </p>
       </div>
 
-      <!-- Assistant role text input -->
-      <div class="form-group">
-        <label for="assistantRole">
-          Assistant role
-          <span class="hint">
-            (e.g., "grading assistant for my composition class",
-            "chore tracker coach for my kids")
-          </span>
-        </label>
-        <input
-          type="text"
-          id="assistantRole"
-          name="assistantRole"
-          placeholder="Describe the job you want your assistant to do…"
-          maxlength="200"
-        />
-      </div>
+      <div class="prompt-grid">
+        <div class="prompt-block">
+          <p class="block-label">1. Your role</p>
+          <label for="userRole">I am a...</label>
+          <input
+            type="text"
+            id="userRole"
+            name="userRole"
+            placeholder="Example: teacher, school librarian, youth mentor"
+            maxlength="120"
+          />
+        </div>
 
-      <!-- Context / details textarea -->
-      <div class="form-group">
-        <label for="contextDetails">
-          Context / details
-          <span class="hint">
-            (e.g., course name, grading categories, list of chores, study topics)
-          </span>
-        </label>
-        <textarea
-          id="contextDetails"
-          name="contextDetails"
-          rows="5"
-          placeholder="Add any extra details that help describe your situation…"
-          maxlength="1000"
-        ></textarea>
-      </div>
+        <div class="prompt-block">
+          <p class="block-label">2. AI role</p>
+          <label for="aiRole">The AI should act as...</label>
+          <input
+            type="text"
+            id="aiRole"
+            name="aiRole"
+            placeholder="Example: a writing expert and app designer"
+            maxlength="160"
+          />
+        </div>
 
-      <!-- Submit button -->
-      <button type="button" id="generateBtn" class="btn-primary">
-        ✨ Generate My Configuration
-      </button>
+        <div class="prompt-block prompt-block-wide">
+          <p class="block-label">3. App goal</p>
+          <label for="appIdea">What simple browser-based app should your AI coder build?</label>
+          <textarea
+            id="appIdea"
+            name="appIdea"
+            rows="4"
+            placeholder="Describe the problem the app should solve and what the user should be able to do."
+            maxlength="500"
+          ></textarea>
+        </div>
+
+        <div class="prompt-block">
+          <p class="block-label">4. Context</p>
+          <label for="contextDetails">Context and details</label>
+          <textarea
+            id="contextDetails"
+            name="contextDetails"
+            rows="5"
+            placeholder="Add audience details, examples, constraints, or any background the AI should know."
+            maxlength="1000"
+          ></textarea>
+        </div>
+
+        <div class="prompt-block">
+          <p class="block-label">5. Must-haves</p>
+          <label for="mustHaves">What must the app include?</label>
+          <textarea
+            id="mustHaves"
+            name="mustHaves"
+            rows="5"
+            placeholder="List the key screens, actions, outputs, or interface pieces the app should have."
+            maxlength="1000"
+          ></textarea>
+        </div>
+      </div>
     </section>
 
-    <!-- RESULTS SECTION (hidden until the button is clicked) -->
     <section
       class="results-section"
-      id="resultsSection"
       aria-live="polite"
-      aria-label="Generated assistant configuration"
-      hidden
+      aria-label="Generated build prompt"
     >
-      <h2>Your Assistant Configuration</h2>
-
-      <!-- Each card is one labeled section of the output -->
-      <div class="card" id="cardOverview">
-        <h3>📋 Overview</h3>
-        <p id="outputOverview"></p>
+      <div class="section-heading">
+        <h2>Your AI coder-ready build prompt</h2>
+        <p>
+          Copy this prompt, paste it into your AI coder assistant, and let
+          them build the finished version of the app.
+        </p>
       </div>
 
-      <div class="card" id="cardInputs">
-        <h3>📥 Inputs you provide</h3>
-        <ul id="outputInputs"></ul>
+      <div class="prompt-output-card">
+        <pre id="promptOutput" class="prompt-output"></pre>
       </div>
 
-      <div class="card" id="cardOutputs">
-        <h3>📤 Outputs you get</h3>
-        <ul id="outputOutputs"></ul>
+      <div class="action-row">
+        <button type="button" id="copyBtn" class="btn-primary">Copy Prompt</button>
+        <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
       </div>
-
-      <div class="card" id="cardPrompts">
-        <h3>💬 Example prompts to use with an AI tool</h3>
-        <ul id="outputPrompts"></ul>
-      </div>
-
-      <!-- Copy-to-clipboard button -->
-      <button type="button" id="copyBtn" class="btn-secondary">
-        📋 Copy configuration to clipboard
-      </button>
-      <p class="copy-feedback" id="copyFeedback" aria-live="polite"></p>
     </section>
-
   </main>
 
-  <!-- =============================================
-       FOOTER
-       Workshop credits go here. Edit the text below.
-  ============================================= -->
   <footer>
     <p>
-      Built at the <strong>[Workshop Name]</strong> · Facilitated by
-      <strong>[Your Name]</strong> · <a href="#">[Your Website]</a>
-    </p>
-    <p class="footer-note">
-      This is a starter template — customize it to fit your own use case!
+      Built for live workshops on prompting and browser-based app design.
     </p>
   </footer>
 
-  <!-- Link to our JavaScript file (always at the bottom of <body>) -->
   <script src="script.js"></script>
 </body>
 </html>
