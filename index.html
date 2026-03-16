@@ -3,14 +3,196 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EMU Workshop Build</title>
+  <title>Tilde Taller</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main>
-    <h1>EMU Workshop Build</h1>
-    <p>This page starts intentionally minimal for the live build.</p>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Spanish immersion workflow</p>
+        <h1>Tilde Taller</h1>
+        <p class="intro">
+          Upload or paste plain text, review missing accent marks, train your correction memory,
+          and export a cleaner Spanish draft without leaving the browser.
+        </p>
+      </div>
+      <div class="hero-stats" aria-label="Current review summary">
+        <article class="metric-card">
+          <span class="metric-label">Suggestions</span>
+          <strong class="metric-value" id="suggestionCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Applied</span>
+          <strong class="metric-value" id="appliedCount">0</strong>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">Memory entries</span>
+          <strong class="metric-value" id="memoryCount">0</strong>
+        </article>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="panel import-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">1. Import</p>
+            <h2>Source text</h2>
+          </div>
+          <p class="panel-note">V1 focuses on pasted text and plain-text uploads.</p>
+        </div>
+
+        <label class="field-label" for="sourceText">Paste Spanish text that is missing accent marks</label>
+        <textarea
+          id="sourceText"
+          class="source-input"
+          placeholder="Example: como estas? mi companera tambien practica espanol aqui."
+          spellcheck="false"
+        ></textarea>
+
+        <div class="action-row">
+          <label class="file-button" for="fileInput">Upload .txt</label>
+          <input id="fileInput" type="file" accept=".txt,.md,.csv,text/plain" hidden />
+          <button id="sampleButton" type="button" class="secondary-button">Load sample</button>
+          <button id="clearButton" type="button" class="ghost-button">Clear</button>
+          <button id="analyzeButton" type="button" class="primary-button">Analyze text</button>
+        </div>
+
+        <p class="status-line" id="statusMessage">Paste text or load the sample to begin.</p>
+      </section>
+
+      <section class="panel review-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">2. Review</p>
+            <h2>Original and corrected drafts</h2>
+          </div>
+          <p class="panel-note">Safe fixes apply automatically. Ambiguous fixes stay off until you approve them.</p>
+        </div>
+
+        <div class="preview-grid">
+          <article class="preview-card">
+            <div class="preview-header">
+              <h3>Original</h3>
+              <span class="badge neutral">Reference</span>
+            </div>
+            <div id="originalPreview" class="preview-text empty-state">
+              Your imported text will appear here.
+            </div>
+          </article>
+
+          <article class="preview-card">
+            <div class="preview-header">
+              <h3>Corrected</h3>
+              <span class="badge accent">Export view</span>
+            </div>
+            <div id="correctedPreview" class="preview-text empty-state">
+              Accepted corrections will be highlighted here.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel queue-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">3. Approve</p>
+            <h2>Correction queue</h2>
+          </div>
+          <div class="inline-actions">
+            <button id="applyFlaggedButton" type="button" class="secondary-button">Apply all flagged</button>
+            <button id="resetReviewButton" type="button" class="ghost-button">Reset review</button>
+            <button id="learnButton" type="button" class="primary-button">Learn accepted changes</button>
+          </div>
+        </div>
+
+        <div id="queueSummary" class="summary-strip">
+          No suggestions yet.
+        </div>
+
+        <div id="suggestionList" class="suggestion-list" aria-live="polite"></div>
+      </section>
+
+      <section class="panel memory-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">4. Train</p>
+            <h2>Correction memory</h2>
+          </div>
+          <p class="panel-note">These entries are stored locally in your browser and can guide future AI integrations.</p>
+        </div>
+
+        <form id="memoryForm" class="memory-form">
+          <div class="memory-grid">
+            <label>
+              <span class="field-label">Missing form</span>
+              <input id="memorySource" type="text" placeholder="companera" required />
+            </label>
+            <label>
+              <span class="field-label">Correct form</span>
+              <input id="memoryReplacement" type="text" placeholder="compañera" required />
+            </label>
+          </div>
+
+          <label>
+            <span class="field-label">Notes</span>
+            <input id="memoryNotes" type="text" placeholder="Classroom vocabulary or recurring correction" />
+          </label>
+
+          <div class="action-row">
+            <button type="submit" class="primary-button">Save to memory</button>
+            <button id="exportMemoryButton" type="button" class="secondary-button">Export memory</button>
+            <label class="file-button" for="memoryImportInput">Import memory</label>
+            <input id="memoryImportInput" type="file" accept=".json,application/json" hidden />
+            <button id="clearMemoryButton" type="button" class="ghost-button">Clear memory</button>
+          </div>
+        </form>
+
+        <div id="memoryList" class="memory-list" aria-live="polite"></div>
+      </section>
+
+      <section class="panel export-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="panel-kicker">5. Export</p>
+            <h2>Export and AI handoff</h2>
+          </div>
+          <p class="panel-note">The corrected text stays plain text in V1 so your review remains transparent.</p>
+        </div>
+
+        <div class="export-actions">
+          <button id="copyButton" type="button" class="primary-button">Copy corrected text</button>
+          <button id="downloadButton" type="button" class="secondary-button">Download .txt</button>
+        </div>
+
+        <label class="field-label" for="exportPreview">Corrected export</label>
+        <textarea id="exportPreview" class="export-preview" readonly></textarea>
+
+        <div class="ai-card">
+          <div class="preview-header">
+            <h3>Future AI connector</h3>
+            <span class="badge neutral">Scaffolded</span>
+          </div>
+          <label>
+            <span class="field-label">Provider</span>
+            <select disabled>
+              <option>Choose a provider later</option>
+            </select>
+          </label>
+          <label>
+            <span class="field-label">API key</span>
+            <input type="password" disabled placeholder="Add secure storage before enabling this" />
+          </label>
+          <label>
+            <span class="field-label">Model notes</span>
+            <textarea disabled rows="3">When AI is added, run saved memory before model suggestions and require review on ambiguous accents.</textarea>
+          </label>
+        </div>
+      </section>
+    </div>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
