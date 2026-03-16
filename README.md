@@ -6,6 +6,8 @@ This repository is intentionally starting from a clean slate for the live build 
 
 During the workshop, we will decide on an app idea together and build the first version here in real time.
 
+An empty starter page is included in `index.html` so the repo already has something you can open in a browser before the first live edit.
+
 ## Likely files we will create
 
 - `index.html`
